@@ -1,3 +1,7 @@
+<!-- default badges list -->
+![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/697761947/23.1.5%2B)
+[![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
+<!-- default badges end -->
 # Office File API - Use Office File API Libraries as a Back-End in Web-API Applications
 
 This example shows how to create an ASP.NET Core Web API application with the Office File API libraries. The application contains a series of endpoints to perform the following actions:
