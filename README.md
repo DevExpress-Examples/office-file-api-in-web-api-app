@@ -3,19 +3,20 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T1192524)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-# Office File API - Use Office File API Libraries as a Back-End in Web-API Applications
+# Office File API - Use DevExpress Office File API Libraries (at the backend) for your Web-API Applications
 
-This example shows how to create an ASP.NET Core Web API application with the Office File API libraries. The application contains a series of endpoints to perform the following actions:
+By following the steps outlined in this example, you’ll create an ASP.NET Core Web API application using DevExpress Office File API libraries. The application will include a series of endpoints designed to perform the following actions:
 
-- Convert Word and Excel files to available formats
-- Split Word, Excel and PDF files
-- Merge Word, Excel and PDF files
-- Password-protect Word, Excel and PDF files
+* Convert Word and Excel files to available formats.
+* Split Word, Excel and PDF files.
+* Merge Word, Excel and PDF files.
+* Password-protect Word, Excel and PDF files.
 
- The project contains a Dockerfile that specifies how to build the application in a Docker container.
+The project contains a Dockerfile that specifies how to build the application in a Docker container.
 
- > [!note]
- > You need a license for the [DevExpress Office File API](https://www.devexpress.com/products/net/office-file-api/) Subscription or [DevExpress Universal](https://www.devexpress.com/subscriptions/universal.xml) Subscription to use Office File API libraries in production code.
+
+> [!Note] 
+> You need to purchase a license to use the DevExpress Office File API in production code (DevExpress Office File API Subscription or DevExpress Universal Subscription)
 
 ## Files to Review
 
