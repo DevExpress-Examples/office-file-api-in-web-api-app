@@ -1,22 +1,36 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-bullseye-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["DocumentProcessingWebAPI.csproj", "."]
-RUN dotnet restore "./DocumentProcessingWebAPI.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "DocumentProcessingWebAPI.csproj" -c Release -o /app/build
+# Install the latest version of font libraries
+RUN apt update &&\
+         apt install -y libc6 libicu-dev libfontconfig1
 
-FROM build AS publish
-RUN dotnet publish "DocumentProcessingWebAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# (Optional step) Install the ttf-mscorefonts-installer package
+# to use Microsoft TrueType core fonts in the application
+RUN echo "deb http://ftp.debian.org/debian/ bullseye contrib" >> /etc/apt/sources.list
+RUN apt update
+RUN apt install -y ttf-mscorefonts-installer 
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0-bullseye-slim AS build
+WORKDIR /src
+
+# Specify your DevExpress NuGet Feed URL as the package source
+RUN dotnet nuget add source https://nuget.devexpress.com/{your-feed-authorization-key}/api
+# Copy the project file
+COPY ./DocumentProcessingWebAPI.csproj ./
+
+# Restore as distinct layers
+RUN dotnet restore
+
+# Publish a release
+RUN dotnet publish "DocumentProcessingWebAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
+
+# Define the entry point for the application
 ENTRYPOINT ["dotnet", "DocumentProcessingWebAPI.dll"]
