@@ -14,6 +14,17 @@ By following the steps outlined in this example, you’ll create an ASP.NET Core
 
 The project contains a Dockerfile that specifies how to build the application in a Docker container.
 
+## Build the Docker Image
+
+Obtain a [DevExpress NuGet Feed URL](https://docs.devexpress.com/GeneralInformation/116042/installation/install-devexpress-controls-using-nuget-packages/obtain-your-nuget-feed-credentials) and add your feed authorization key to the [Dockerfile](./CS/DocumentConversionWebApi/Dockerfile) to specify the package source for the [DevExpress.Document.Processor](https://nuget.devexpress.com/packages/DevExpress.Document.Processor/) NuGet package.
+
+Use the following commands to build and run the docker image:
+
+  ```
+  docker build -t officefileapinwebapi .
+  docker run -d -p 8080:80 officefileapinwebapi
+  ```
+
 
 > [!Note] 
 > You need to purchase a license to use the DevExpress Office File API in production code (DevExpress Office File API Subscription or DevExpress Universal Subscription)
