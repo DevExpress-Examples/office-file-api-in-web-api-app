@@ -16,7 +16,7 @@ The project contains a Dockerfile that specifies how to build the application in
 
 ## Build the Docker Image
 
-Obtain a [DevExpress NuGet Feed URL](https://docs.devexpress.com/GeneralInformation/116042/installation/install-devexpress-controls-using-nuget-packages/obtain-your-nuget-feed-credentials) and add your feed authorization key to the [Dockerfile](./CS/DocumentConversionWebApi/Dockerfile) to specify the package source for the [DevExpress.Document.Processor](https://nuget.devexpress.com/packages/DevExpress.Document.Processor/) NuGet package.
+Obtain a [DevExpress NuGet Feed URL](https://docs.devexpress.com/GeneralInformation/116042/installation/install-devexpress-controls-using-nuget-packages/obtain-your-nuget-feed-credentials) and add your feed authorization key to the [Dockerfile](./CS/Dockerfile) to specify the package source for the [DevExpress.Document.Processor](https://nuget.devexpress.com/packages/DevExpress.Document.Processor/) NuGet package.
 
 Use the following commands to build and run the docker image:
 
