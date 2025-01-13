@@ -1,5 +1,5 @@
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-bullseye-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -10,15 +10,18 @@ RUN apt update &&\
  
 # (Optional step) Install the ttf-mscorefonts-installer package
 # to use Microsoft TrueType core fonts in the application
-RUN echo "deb http://ftp.debian.org/debian/ bullseye contrib" >> /etc/apt/sources.list
+RUN echo "deb http://ftp.debian.org/debian/ bookworm contrib" >> /etc/apt/sources.list
 RUN apt update
 RUN apt install -y ttf-mscorefonts-installer
  
-FROM mcr.microsoft.com/dotnet/sdk:7.0-bullseye-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim AS build
 WORKDIR /src
  
+# DX
 # Specify your DevExpress NuGet Feed URL as the package source
-RUN dotnet nuget add source https://nuget.devexpress.com/{your-authorization-key}/api
+RUN --mount=type=secret,id=dxnuget dotnet nuget add source $(cat /run/secrets/dxnuget) -n devexpress-nuget
+# /DX
+
 # Copy the project file
 COPY ["DocumentProcessingWebAPI.csproj", "."]
  

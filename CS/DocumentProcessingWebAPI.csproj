@@ -7,6 +7,7 @@
     <UserSecretsId>c8ad3c81-f33a-4c4a-b63f-5d8d4c6a43b8</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+	<DockerfileBuildArguments>--secret id=dxnuget,source=secrets.dev.yaml</DockerfileBuildArguments>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DevExpress.Document.Processor" Version="*" />
