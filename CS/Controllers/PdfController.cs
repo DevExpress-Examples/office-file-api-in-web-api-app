@@ -1,5 +1,6 @@
 using DevExpress.Compression;
 using DevExpress.Pdf;
+using DocumentProcessingWebAPI.BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
@@ -83,5 +84,32 @@ namespace DocumentProcessingWebAPI.Controllers {
                 return StatusCode(500, e.Message + Environment.NewLine + e.StackTrace);
             }
         }
+
+        [HttpPost]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Download a File", typeof(FileContentResult))]
+        public async Task<IActionResult> ConvertToAccessiblePdf(IFormFile file, PdfCompatibility format)
+        {
+            try
+            {
+                MemoryStream result = new MemoryStream();
+                using (var stream = new MemoryStream())
+                {
+                    await file.CopyToAsync(stream);
+                    stream.Seek(0, SeekOrigin.Begin);
+
+                    var converter = new PdfDocumentConverter(stream);
+                    // Convert the file to the specified format.
+                    converter.Convert(format);
+                    converter.SaveDocument(result);
+                    result.Seek(0, SeekOrigin.Begin);
+                    return File(result, "application/pdf", "result.pdf");
+                }
+                }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message + Environment.NewLine + e.StackTrace);
+            }
+        }
+
     }
 }

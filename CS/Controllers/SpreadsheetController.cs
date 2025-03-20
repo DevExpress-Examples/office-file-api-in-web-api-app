@@ -1,5 +1,7 @@
 ﻿using DevExpress.Compression;
 using DevExpress.Spreadsheet;
+using DevExpress.XtraPrinting;
+using DevExpress.XtraRichEdit;
 using DocumentProcessingWebAPI.BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -106,5 +108,34 @@ namespace DocumentProcessingWebAPI.Controllers {
                 return StatusCode(500, e.Message + Environment.NewLine + e.StackTrace);
             }
         }
+
+        [HttpPost]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Download a file", typeof(FileContentResult))]
+
+
+        public async Task<IActionResult> ExportToAccessiblePdf(IFormFile file, [FromQuery] AccessiblePdfFormat format)
+        {
+            try
+            {
+                using (var stream = new MemoryStream())
+                {
+                    await file.CopyToAsync(stream);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    using (Workbook workbook = new Workbook())
+                    {
+                        workbook.LoadDocument(stream);
+
+                        PdfExportOptions options = new PdfExportOptions();
+                        Stream result = SpreadsheetHelper.ExportToAccessiblePdf(workbook, format);
+                        return File(result, "application/pdf", $"result.pdf");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message + Environment.NewLine + e.StackTrace);
+            }
+        }
+
     }
 }

@@ -12,6 +12,8 @@ By following the steps outlined in this example, you’ll create an ASP.NET Core
 * Split Word, Excel and PDF files.
 * Merge Word, Excel and PDF files.
 * Password-protect Word, Excel and PDF files.
+* Export Word, Excel and PDF files to accessible PDFs.
+* Generate a letter based on a Word mail merge template.
 
 The project contains a Dockerfile that specifies how to build the application in a Docker container.
 
@@ -21,24 +23,24 @@ Obtain a [DevExpress NuGet Feed URL](https://docs.devexpress.com/GeneralInformat
 
 Use the following commands to build and run the docker image:
 
-  ```
-  docker build -t officefileapinwebapi .
-  docker run -d -p 8080:80 officefileapinwebapi
-  ```
+```
+docker build -t officefileapinwebapi .
+docker run -d -p 8080:80 officefileapinwebapi 
+```
 
-
-> [!Note] 
+> [!Note]
 > You need to purchase a license to use the DevExpress Office File API in production code (DevExpress Office File API Subscription or DevExpress Universal Subscription)
 
 ## Files to Review
 
- * [PdfController.cs](./CS/Controllers/PdfController.cs)
- * [RichEditController.cs](./CS/Controllers/RichEditController.cs)
- * [SpreadsheetController.cs](./CS/Controllers/SpreadsheetController.cs)
+* [PdfController.cs](./CS/Controllers/PdfController.cs)
+* [RichEditController.cs](./CS/Controllers/RichEditController.cs)
+* [SpreadsheetController.cs](./CS/Controllers/SpreadsheetController.cs)
 
 ## More Examples
 
 * [How to Dockerize an Office File API Application](https://github.com/DevExpress-Examples/dockerize-office-file-api-app)
+
 <!-- feedback -->
 ## Does this example address your development requirements/objectives?
 

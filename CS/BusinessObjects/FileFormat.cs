@@ -32,4 +32,15 @@
         Xml = 12,
         Pdf = 13
     }
+
+    public enum AccessiblePdfFormat
+    {
+        PdfUa = 1,
+        PdfA1a = 2,
+        PdfA1b = 3,
+        PdfA2a = 4,
+        PdfA2b = 5,
+        PdfA3a = 6,
+        PdfA3b = 7,
+    }
 }
