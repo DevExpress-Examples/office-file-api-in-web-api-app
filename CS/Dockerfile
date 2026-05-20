@@ -16,11 +16,9 @@ RUN apt install -y ttf-mscorefonts-installer
  
 FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim AS build
 WORKDIR /src
- 
-# DX
-# Specify your DevExpress NuGet Feed URL as the package source
-RUN --mount=type=secret,id=dxnuget dotnet nuget add source $(cat /run/secrets/dxnuget) -n devexpress-nuget
-# /DX
+
+# nuget.org is the default package source in the SDK image, no need to add it explicitly
+# RUN dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
 
 # Copy the project file
 COPY ["DocumentProcessingWebAPI.csproj", "."]
